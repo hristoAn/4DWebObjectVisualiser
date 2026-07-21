@@ -1,9 +1,9 @@
 name: Lint and format
 run-name: ${{ github.actor }} is building 4d viewer
 on:
+  workflow_dispatch:
   push:
     branches-ignore: [main]
-  workflow-dispatch: # Manual trigger
 
 jobs:
   prettier:
