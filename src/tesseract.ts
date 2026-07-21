@@ -1,6 +1,5 @@
 import * as THREE from "three";
 
-
 /** A point in 4D space. */
 export interface Vec4 {
   x: number;
@@ -24,7 +23,11 @@ export class Tesseract {
   private readonly baseVertices: Vec4[];
 
   // The rotation currently applied in each plane, in radians.
-  private angles: { xw: number; yw: number; zw: number } = { xw: 0, yw: 0, zw: 0 };
+  private angles: { xw: number; yw: number; zw: number } = {
+    xw: 0,
+    yw: 0,
+    zw: 0,
+  };
 
   // Pairs of vertex indices that are connected by an edge (32 total).
   private readonly edgeIndices: [number, number][];
@@ -90,17 +93,26 @@ export class Tesseract {
     this.lineGeometry = new THREE.BufferGeometry();
     this.lineGeometry.setAttribute(
       "position",
-      new THREE.BufferAttribute(new Float32Array(this.edgeIndices.length * 2 * 3), 3)
+      new THREE.BufferAttribute(
+        new Float32Array(this.edgeIndices.length * 2 * 3),
+        3,
+      ),
     );
     this.lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
-    const lineSegments = new THREE.LineSegments(this.lineGeometry, this.lineMaterial);
+    const lineSegments = new THREE.LineSegments(
+      this.lineGeometry,
+      this.lineMaterial,
+    );
     this.group.add(lineSegments);
 
     // --- inner cube: 6 faces, transparent light green ---
     this.innerCubeGeometry = new THREE.BufferGeometry();
     this.innerCubeGeometry.setAttribute(
       "position",
-      new THREE.BufferAttribute(new Float32Array(this.innerCubeFaces.length * 6 * 3), 3)
+      new THREE.BufferAttribute(
+        new Float32Array(this.innerCubeFaces.length * 6 * 3),
+        3,
+      ),
     );
     this.innerCubeMaterial = new THREE.MeshBasicMaterial({
       color: 0x90ee90, // light green
@@ -109,30 +121,31 @@ export class Tesseract {
       side: THREE.DoubleSide, // visible from inside AND outside
       depthWrite: false, // avoids see-through sorting glitches
     });
-    this.innerCubeMesh = new THREE.Mesh(this.innerCubeGeometry, this.innerCubeMaterial);
+    this.innerCubeMesh = new THREE.Mesh(
+      this.innerCubeGeometry,
+      this.innerCubeMaterial,
+    );
     this.group.add(this.innerCubeMesh);
 
     this.updateGeometry(); // draw the initial, un-rotated shape
   }
 
-
   // /** Rotate in the X-W plane by `radians`, added to the current angle. */
 
-
   public rotateOnPlane(radians: number, plain: RotationPlane): void {
-      switch(plain) {
-        case "xw":
-          this.angles.xw += radians;
-          break;
-        case "yw":
-          this.angles.yw += radians;
-          break;
-        case "zw":
-          this.angles.zw += radians;
-          break
-      }
-      this.updateGeometry();
-      }
+    switch (plain) {
+      case "xw":
+        this.angles.xw += radians;
+        break;
+      case "yw":
+        this.angles.yw += radians;
+        break;
+      case "zw":
+        this.angles.zw += radians;
+        break;
+    }
+    this.updateGeometry();
+  }
 
   /** Nudge all three planes at once - handy in an animation loop so you
    *  only recompute the geometry once per frame instead of three times. */
@@ -175,7 +188,11 @@ export class Tesseract {
 
   /** Rotate a single 4D point by `angle` radians in one plane. Pure
    *  function - returns a new point, never mutates the one passed in. */
-  private static rotatePoint(p: Vec4, plane: RotationPlane, angle: number): Vec4 {
+  private static rotatePoint(
+    p: Vec4,
+    plane: RotationPlane,
+    angle: number,
+  ): Vec4 {
     const c = Math.cos(angle);
     const s = Math.sin(angle);
     switch (plane) {
@@ -210,19 +227,36 @@ export class Tesseract {
     const projected = rotated.map((p) => this.project(p));
 
     // Write the 32 edges.
-    const linePositions = this.lineGeometry.attributes.position as THREE.BufferAttribute;
+    const linePositions = this.lineGeometry.attributes
+      .position as THREE.BufferAttribute;
     this.edgeIndices.forEach(([a, b], i) => {
-      linePositions.setXYZ(i * 2, projected[a].x, projected[a].y, projected[a].z);
-      linePositions.setXYZ(i * 2 + 1, projected[b].x, projected[b].y, projected[b].z);
+      linePositions.setXYZ(
+        i * 2,
+        projected[a].x,
+        projected[a].y,
+        projected[a].z,
+      );
+      linePositions.setXYZ(
+        i * 2 + 1,
+        projected[b].x,
+        projected[b].y,
+        projected[b].z,
+      );
     });
     linePositions.needsUpdate = true;
 
     // Write the inner cube's 6 faces (2 triangles each).
-    const facePositions = this.innerCubeGeometry.attributes.position as THREE.BufferAttribute;
+    const facePositions = this.innerCubeGeometry.attributes
+      .position as THREE.BufferAttribute;
     let v = 0;
     for (const face of this.innerCubeFaces) {
-      const [i0, i1, i2, i3] = face.map((local) => this.innerCubeVertexIndices[local]);
-      const p0 = projected[i0], p1 = projected[i1], p2 = projected[i2], p3 = projected[i3];
+      const [i0, i1, i2, i3] = face.map(
+        (local) => this.innerCubeVertexIndices[local],
+      );
+      const p0 = projected[i0],
+        p1 = projected[i1],
+        p2 = projected[i2],
+        p3 = projected[i3];
       facePositions.setXYZ(v++, p0.x, p0.y, p0.z);
       facePositions.setXYZ(v++, p1.x, p1.y, p1.z);
       facePositions.setXYZ(v++, p2.x, p2.y, p2.z);

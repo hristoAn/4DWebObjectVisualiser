@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "prettier": "prettier . --write",
+    "prettier:check": "prettier . --check",
+    "eslint": "eslint . --fix",
+    "eslint:check": "eslint ."
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

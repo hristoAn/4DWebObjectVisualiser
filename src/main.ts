@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 
 // Scene
 const scene = new THREE.Scene();
@@ -8,7 +8,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  1000,
 );
 
 // Renderer
@@ -20,13 +20,11 @@ document.body.appendChild(renderer.domElement);
 
 // scene.add(teseract.);
 
-
 camera.position.z = 5;
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
-
 
   renderer.render(scene, camera);
 }

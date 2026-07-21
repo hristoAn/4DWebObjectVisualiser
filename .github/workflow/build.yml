@@ -1,0 +1,25 @@
+name: Lint and format
+run-name: ${{ github.actor }} is building 4d viewer
+on:
+  push:
+    branches-ignore: [main]
+  workflow-dispatch: # Manual trigger
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dev dependencies
+        run: npm install
+      - name: Prettier check
+        run: npm run prettier:check
+
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dev dependencies
+        run: npm install
+      - name: ESLint check
+        run: npm run eslint:check
