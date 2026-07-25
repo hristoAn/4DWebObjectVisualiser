@@ -1,4 +1,4 @@
-<!doctype html>
+ <!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,5 +10,54 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>  -->
+
+ <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tesseract-test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <div class="title"><span>Tesseract</span> · 4D → 3D Projection</div>
+<div class="hint">drag to orbit · scroll to zoom</div>
+
+<div class="panel">
+  <div class="corner-tr"></div>
+  <div class="corner-br"></div>
+
+  <div class="row">
+    <div class="row-label"><b>XW</b> plane <span class="value" id="xwValue">0°</span></div>
+    <input type="range" id="xwSlider" min="-180" max="180" value="0" step="1" />
+  </div>
+  <div class="row">
+    <div class="row-label"><b>YW</b> plane <span class="value" id="ywValue">0°</span></div>
+    <input type="range" id="ywSlider" min="-180" max="180" value="0" step="1" />
+  </div>
+  <div class="row">
+    <div class="row-label"><b>ZW</b> plane <span class="value" id="zwValue">0°</span></div>
+    <input type="range" id="zwSlider" min="-180" max="180" value="0" step="1" />
+  </div>
+
+  <div class="controls-bottom">
+    <label class="toggle">
+      <input type="checkbox" id="autoRotate" checked />
+      auto-rotate
+    </label>
+    <button class="reset-btn" id="resetBtn">Reset</button>
+  </div>
+</div>
+
+<div class="legend"><div class="swatch"></div> inner cell (w = −1)</div>
+
   </body>
 </html>
