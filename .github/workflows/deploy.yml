@@ -1,0 +1,94 @@
+# name: Deploy site to Github Pages
+# run-name: ${{ github.actor }} is building 4d viewer
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches: [main]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Setup dev dependencies
+#         run: npm install
+#       - name: Build project
+#         run: npm run build
+#         name: upload build
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: 4DObjectVisualiser
+#           path: ./dist
+#     # TODO: Use action that will store the build artifact; use official github action
+#     # the build articat is the ./dist folder that is the output of the 'npm run build' command
+#     # ref: https://docs.github.com/en/actions/tutorials/store-and-share-data
+
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: [build]
+#     steps:
+#       - uses: actions/checkout@v4
+#         name: download build
+#         uses: actions/download-artifact@v4
+#           with:
+#             name: 4DObjectVisualiser
+#             path: ./dist
+        
+#       - name: deploy build
+#         run: cd ./dist && npm run 4DObjectVisualiser
+
+#     # TODO: Fetch the build artifact to use in this job's steps; use official github action
+#     # ref: https://docs.github.com/en/actions/tutorials/store-and-share-data
+
+#     # step to upload to github pages
+
+name: Deploy site to Github Pages
+run-name: ${{ github.actor }} is building 4d viewer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup dev dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: https://hristoan.github.io/4DWebObjectVisualiser/
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
