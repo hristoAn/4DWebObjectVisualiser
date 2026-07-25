@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { Tesseract } from "./tesseract";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import './style.css';
 
 // Standard Three.js setup
 const scene = new THREE.Scene();
