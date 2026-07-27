@@ -1,17 +1,10 @@
 import * as THREE from "three";
+import type { IFourDFigure } from "./iFourDFigure";
+import type { Vec4 } from "./iFourDFigure";
+import type { RotationPlane } from "./iFourDFigure";
 
-/** A point in 4D space. */
-export interface Vec4 {
-  x: number;
-  y: number;
-  z: number;
-  w: number;
-}
 
-/** The three rotation planes that involve the 4th axis (W). */
-export type RotationPlane = "xw" | "yw" | "zw";
-
-export class Tesseract {
+export class Tesseract implements IFourDFigure {
   /** Add this to your scene: `scene.add(tesseract.group)`. */
   public readonly group: THREE.Group;
 
