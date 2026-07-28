@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import type { IFourDFigure } from "./iFourDFigure";
+import type { FourDFigure } from "./iFourDFigure";
 import type { Vec4 } from "./iFourDFigure";
 import type { RotationPlane } from "./iFourDFigure";
 
 
-export class Tesseract implements IFourDFigure {
+export class Tesseract implements FourDFigure {
   /** Add this to your scene: `scene.add(tesseract.group)`. */
   public readonly group: THREE.Group;
 
