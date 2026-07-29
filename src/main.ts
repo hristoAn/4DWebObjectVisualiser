@@ -1,6 +1,10 @@
 import * as THREE from "three";
-import { Tesseract } from "./tesseract";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import type { FourDFigure } from "./iFourDFigure";
+// import { Tesseract } from "./tesseract";
+// import { HyperPyramid } from "./HyperPyramid";
+import { HyperSphere } from "./HyperSphere";
+
 
 // Standard Three.js setup
 const scene = new THREE.Scene();
@@ -14,17 +18,19 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 
-const tesseract = new Tesseract();
-scene.add(tesseract.group);
+// const figure: FourDFigure = new Tesseract();
+const figure: FourDFigure = new HyperSphere();
+// const figure: FourDFigure = new HyperPyramid();
+scene.add(figure.group);
 
 
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
 
-  tesseract.rotateOnPlane(0.003, "yw");
-  tesseract.rotateOnPlane(0.003, "xw");
-  tesseract.rotateOnPlane(0.003, "zw");
+  figure.rotateOnPlane(0.003, "yw");
+  figure.rotateOnPlane(0.003, "xw");
+  figure.rotateOnPlane(0.003, "zw");
 
   controls.update();
   renderer.render(scene, camera);

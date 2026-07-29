@@ -1,18 +1,3 @@
- <!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>4dwebobjectvisualiser</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
-</html>  -->
-
  <!doctype html>
 <html lang="en">
   <head>
@@ -24,8 +9,64 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css">
+    <script src="app.js" defer></script>
   </head>
   <body>
+
+<!--     
+<div class="shape-toggle" role="group" aria-label="4D figure">
+  <button
+    type="button"
+    class="shape-btn is-active"
+    data-shape="tesseract"
+    style="--accent: #90ee90"
+    title="Tesseract"
+  >
+    <span class="sr-only">Tesseract</span>
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <rect x="7" y="7" width="24" height="24" />
+      <rect x="17" y="17" width="24" height="24" />
+      <line x1="7" y1="7" x2="17" y2="17" />
+      <line x1="31" y1="7" x2="41" y2="17" />
+      <line x1="7" y1="31" x2="17" y2="41" />
+      <line x1="31" y1="31" x2="41" y2="41" />
+    </svg>
+  </button>
+ 
+  <button
+    type="button"
+    class="shape-btn"
+    data-shape="hypersphere"
+    style="--accent: #87cefa"
+    title="HyperSphere"
+  >
+    <span class="sr-only">HyperSphere</span>
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="16" />
+      <ellipse cx="24" cy="24" rx="16" ry="5" />
+      <ellipse cx="24" cy="24" rx="16" ry="5" transform="rotate(60 24 24)" />
+    </svg>
+  </button>
+ 
+  <button
+    type="button"
+    class="shape-btn"
+    data-shape="hyperpyramid"
+    style="--accent: #ffa07a"
+    title="HyperPyramid"
+  >
+    <span class="sr-only">HyperPyramid</span>
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <rect x="8" y="22" width="32" height="20" />
+      <line x1="24" y1="6" x2="8" y2="22" />
+      <line x1="24" y1="6" x2="40" y2="22" />
+      <line x1="24" y1="6" x2="40" y2="42" />
+      <line x1="24" y1="6" x2="8" y2="42" />
+    </svg>
+  </button>
+</div>
+ -->
+
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <div class="title"><span>Tesseract</span> · 4D → 3D Projection</div>
