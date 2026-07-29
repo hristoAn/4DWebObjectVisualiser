@@ -13,13 +13,21 @@
   </head>
   <body>
 
-<!--     
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <div class="title"><span id="figureName">Tesseract</span> · 4D → 3D Projection</div>
+<div class="hint">drag to orbit · scroll to zoom</div>
+
+<!-- Each button's accent colour comes from the `--shape-*` custom property
+     that `data-shape` maps to in style.css, which is the exact colour that
+     figure paints its highlighted cell with. ShapePicker (shapePicker.ts)
+     handles the clicks and keeps `is-active` / `aria-pressed` in sync. -->
 <div class="shape-toggle" role="group" aria-label="4D figure">
   <button
     type="button"
     class="shape-btn is-active"
     data-shape="tesseract"
-    style="--accent: #90ee90"
+    aria-pressed="true"
     title="Tesseract"
   >
     <span class="sr-only">Tesseract</span>
@@ -32,12 +40,12 @@
       <line x1="31" y1="31" x2="41" y2="41" />
     </svg>
   </button>
- 
+
   <button
     type="button"
     class="shape-btn"
     data-shape="hypersphere"
-    style="--accent: #87cefa"
+    aria-pressed="false"
     title="HyperSphere"
   >
     <span class="sr-only">HyperSphere</span>
@@ -47,12 +55,12 @@
       <ellipse cx="24" cy="24" rx="16" ry="5" transform="rotate(60 24 24)" />
     </svg>
   </button>
- 
+
   <button
     type="button"
     class="shape-btn"
     data-shape="hyperpyramid"
-    style="--accent: #ffa07a"
+    aria-pressed="false"
     title="HyperPyramid"
   >
     <span class="sr-only">HyperPyramid</span>
@@ -65,12 +73,6 @@
     </svg>
   </button>
 </div>
- -->
-
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-    <div class="title"><span>Tesseract</span> · 4D → 3D Projection</div>
-<div class="hint">drag to orbit · scroll to zoom</div>
 
 <div class="panel">
   <div class="corner-tr"></div>
@@ -98,7 +100,9 @@
   </div>
 </div>
 
-<div class="legend"><div class="swatch"></div> inner cell (w = −1)</div>
+<div class="legend" id="legend" data-shape="tesseract">
+  <div class="swatch"></div> <span id="legendLabel">inner cell (w = −1)</span>
+</div>
 
   </body>
 </html>
